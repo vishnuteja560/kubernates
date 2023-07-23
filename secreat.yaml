@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: first-replicaset
+  labels:
+    a: america     
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+        a: america
+  template:
+    metadata:
+      labels:
+        a: america
+        spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+    volumeMounts:
+      - name: first-secret-using-vol
+        mountPath: /app
+
+  volumes:
+  - name: first-secret-using-vol
+    secret:
+      secretName: secret-1
+        ports:
+        - containerPort: 80        

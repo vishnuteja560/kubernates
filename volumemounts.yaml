@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secret-volumes
+  labels:
+    a: america     
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+        a: america
+  template:
+    metadata:
+      labels:
+        a: america
+    spec:
+      volumes:
+      - name: secret-volumes
+        secret:
+         secretName: secret-1        
+      containers:
+      - name: nginx
+        image: tomcat:8
+        ports:
+        - containerPort: 80        
+        volumeMounts:
+        - name: secret-volumes
+          mountPath: /app
+         
