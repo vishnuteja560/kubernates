@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: first-persistent-volume
+  labels:
+    a: america     
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+        a: america
+  template:
+    metadata:
+      labels:
+        a: america
+    spec:
+      volumes:   
+      - name: task-pv-volume
+        persistentVolumeClaim:
+          claimName: task-pv-claim
+      containers:
+      - name: image-1
+        image: nginx
+        volumeMounts:
+        - mountPath: /app/vishnu
+          name: task-pv-volume
+        ports:
+        - containerPort: 80        

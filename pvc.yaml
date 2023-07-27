@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-sc
+spec:
+  storageClassName: first-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 24Gi
+
